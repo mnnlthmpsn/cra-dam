@@ -1,18 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { List } from 'antd'
-import { useHistory, useParams, Link } from 'react-router-dom'
-import { MyCourseContext } from '../contexts/MyCourseContext'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const CourseTitles = () => {
-
-    let history = useHistory()
-
-    let { course_id, topic_id } = useParams()
-
-    const { myCourses } = useContext(MyCourseContext)
-
-    const currentCourse = myCourses.filter(myCourse => myCourse.id == course_id)
-    const currentCourseTopics = currentCourse[0].topic
 
 
     return (
@@ -21,7 +12,7 @@ const CourseTitles = () => {
             <div className='eventContainer'>
                 <List
                     itemLayout='horizontal'
-                    dataSource={currentCourseTopics}
+                    dataSource={[]}
                     size='small'
                     renderItem={item => (
                         <List.Item key={item.id}>

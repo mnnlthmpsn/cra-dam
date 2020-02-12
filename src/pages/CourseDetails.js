@@ -1,51 +1,58 @@
-import React, { useContext, useEffect } from 'react'
-import { MyCourseContext } from '../contexts/MyCourseContext'
-import { useParams } from 'react-router-dom'
+import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
-import { Col, Row, List } from 'antd'
-import CourseTitles from '../components/CourseTitles'
+import { Col, Row, List, Button } from 'antd'
 import Event from '../components/Event'
+import { TopicContext } from '../contexts/TopicContext'
+import { SubTopicContext } from '../contexts/SubTopicContext'
+import { useHistory } from 'react-router'
 
 
 const CourseDetails = props => {
 
-    let { course_id, topic_id } = useParams()
-    const { myCourses } = useContext(MyCourseContext)
-    const currentCourse = myCourses.filter(myCourse => myCourse.id == course_id)
-    const course = currentCourse[0]
-    const topics = course.topic
-    
-    useEffect(() => {
-        console.log(topics)
-    })
+    const history = useHistory()
+
+    const { topics } = useContext(TopicContext)
+    const { getSubTopics } = useContext(SubTopicContext)
+
+    const ReadTopic = (item) => {
+        getSubTopics(item.id)
+        history.push(`/topic/${item.id}`)
+    }
 
     return (
         <div>
             <Navbar />
             <Row>
-                <Col span={5}>
-                    <CourseTitles />
-                </Col>
-                <Col span={12}>
+                <Col xs={24} sm={24} md={17} lg={17}>
                     <div className='ComponentContainer'>
-                        <List 
+                        <List
+                            basic
+                            header={<h3>Read Course</h3>}
                             itemLayout='vertical'
                             pagination={{
                                 onChange: page => {
                                     console.log(page)
                                 },
-                                pageSize: 1
+                                pageSize: 10
                             }}
                             dataSource={topics}
-                            renderItem={item=>(
-                                <List.Item key={item.id}>
-                                    {item.content}
+                            renderItem={item => (
+                                <List.Item key={item.id} 
+                                    extra={
+                                        <div>
+                                            <Button type='primary' onClick={() => ReadTopic(item)}>Continue</Button>
+                                        </div>
+                                    }
+                                >
+                                    <List.Item.Meta 
+                                        title={<h4>{item.title}</h4>}
+                                    />
                                 </List.Item>
                             )}
                         />
                     </div>
                 </Col>
-                <Col span={7}>
+                <Col span={7} className='event'>
                     <Event />
                 </Col>
             </Row>

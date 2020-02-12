@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
 import Event from '../components/Event'
+import FooterContent from '../components/FooterContent'
 import { Row, Col, List, Button, Avatar, message } from 'antd'
 import { CourseContext } from '../contexts/CourseContext'
 import { MyCourseContext } from '../contexts/MyCourseContext'
@@ -23,9 +24,10 @@ const Courses = () => {
             <Navbar />
             <Row>
                 <Col span={5}></Col>
-                <Col span={12}>
+                <Col xs={24} sm={24} md={12} lg={12}>
                     <div className='ComponentContainer'>
                         <List
+                            basic
                             header={<h3>All Courses</h3>}
                             itemLayout='vertical'
                             pagination={{
@@ -51,16 +53,17 @@ const Courses = () => {
                             )}
                         />
                     </div>
-                    <div style={{ marginTop: 8 }}>
+                    <div className='col-button'>
                         <Button onClick={() => {
                             history.push('/dashboard')
                         }} type='primary'>Return to Library</Button>
                     </div>
                 </Col>
-                <Col span={7}>
+                <Col span={7} className='event '>
                     <Event />
                 </Col>
             </Row>
+            <FooterContent />
         </div>
     )
 }

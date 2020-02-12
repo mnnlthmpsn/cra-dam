@@ -4,23 +4,31 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom/'
 import 'antd/dist/antd.css'
+import './custom-antd.css'
 import './index.css'
+import AuthContextProvider from './contexts/AuthContext';
 import CourseContextProvider from './contexts/CourseContext';
-import UserContextProvider from './contexts/UserContext';
 import MyCourseContextProvider from './contexts/MyCourseContext'
+import TopicContextProvider from './contexts/TopicContext';
+import SubTopicContextProvider from './contexts/SubTopicContext';
 
 
 
 ReactDOM.render(
-    <UserContextProvider>
-        <CourseContextProvider>
-            <MyCourseContextProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </MyCourseContextProvider>
-        </CourseContextProvider>
-    </UserContextProvider>,
+    <CourseContextProvider>
+        <MyCourseContextProvider>
+            <TopicContextProvider>
+                <SubTopicContextProvider>
+                    <AuthContextProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </AuthContextProvider>
+                </SubTopicContextProvider>
+            </TopicContextProvider>
+        </MyCourseContextProvider>
+    </CourseContextProvider>
+    ,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

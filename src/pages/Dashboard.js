@@ -1,27 +1,33 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Navbar from '../components/Navbar'
-import { Button, List, Avatar, Row, Col, message, Empty } from 'antd'
+import FooterContent from '../components/FooterContent'
+import { Button, List, Avatar, Row, Col, message, Form } from 'antd'
 import { useHistory } from 'react-router-dom'
 import Event from '../components/Event'
 import { MyCourseContext } from '../contexts/MyCourseContext'
+import { TopicContext } from '../contexts/TopicContext'
 
 const Dashboard = () => {
 
     const history = useHistory()
 
+    const [loading, setLoading] = useState(false)
     const { myCourses, RemoveCourse } = useContext(MyCourseContext)
+    const { getTopics } = useContext(TopicContext)
 
     const AddCourse = () => {
+        setLoading(true)
         history.push('/courses')
     }
 
     const RemoveMyCourse = (item) => {
         RemoveCourse(item.id)
-        message.warning(`${item.title} removed from Library`)
+        message.warning(`${item.name} removed from Library`)
     }
 
     const ReadCourse = (item) => {
-        history.push(`/course/${item.id}/topic/${item.topic[0].id}`)
+        getTopics(item.id)
+        history.push(`/course/${item.id}`)
     }
 
     return (
@@ -29,7 +35,7 @@ const Dashboard = () => {
             <Navbar />
             <Row>
                 <Col span={5}></Col>
-                <Col span={12}>
+                <Col xs={24} sm={24} md={12} lg={12}>
                     <div className='ComponentContainer'>
                         <List
                             header={<h3>Library</h3>}
@@ -60,14 +66,19 @@ const Dashboard = () => {
                             )}
                         />
                     </div>
-                    <div style={{ marginTop: 8 }}>
-                        <Button onClick={AddCourse} type='primary'>Add Courses</Button>
+                    <div className='col-button'>
+                        <Form>
+                            <Form.Item>
+                                <Button onClick={AddCourse} type='primary' loading={loading}>Add Courses</Button>
+                            </Form.Item>
+                        </Form>
                     </div>
                 </Col>
-                <Col span={7}>
+                <Col span={7} className='event'>
                     <Event />
                 </Col>
             </Row>
+            <FooterContent />
         </div>
     )
 }

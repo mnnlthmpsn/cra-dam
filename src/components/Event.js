@@ -12,12 +12,12 @@ const Event = () => {
             <div className='eventContainer'>
                 <List
                     itemLayout='horizontal'
-                    dataSource={courses}
+                    dataSource={[]}
                     size='small'
                     renderItem={item => (
                         <List.Item key={item.id}>
                             <List.Item.Meta
-                                title={item.title}
+                                title={item.name}
                                 description={item.description}
                             />
                         </List.Item>

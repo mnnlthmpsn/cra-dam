@@ -1,54 +1,43 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom';
-import { Form, Icon, Input, Button } from 'antd';
-import { UserContext } from '../contexts/UserContext';
+import { message } from 'antd';
+import firebase from 'firebase'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import {AuthContext} from '../contexts/AuthContext'
 
 
 const LoginForm = () => {
 
     let history = useHistory()
 
-    const [email, setEmail] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [password, setPassword] = useState('')
-    const { setMail } = useContext(UserContext)
+    const { setIsAuthenticated } = useContext(AuthContext)
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setLoading(true)
-        // check validity of Email and password here
-        setMail(email)
-        history.push('/dashboard')
+    const uiConfig = {
+        signInFlow: 'popup',
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        ],
+        callbacks: {
+            signInSuccessWithAuthResult: () => {
+                setIsAuthenticated(true)
+                message.success(`Welcome ${firebase.auth().currentUser.displayName}`)
+                history.push('/dashboard')
+            },
+            signInFailure: (error) => {
+                message.error(error.message)
+            } 
+        }
     }
 
+
     return (
-        <Form layout='inline' onSubmit={handleSubmit}>
-            <Form.Item>
-                <Input
-                    onChange={e => setEmail(e.target.value)}
-                    type='email'
-                    placeholder='Email'
-                    prefix={<Icon type='mail' style={{ color: 'rgba(0,0,0,.25' }} />}
-                    required
-                />
-            </Form.Item>
-            <Form.Item>
-                <Input.Password
-                    onChange={e => setPassword(e.target.value)}
-                    placeholder='Password'
-                    prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    required
-                />
-            </Form.Item>
-            <Form.Item>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                    Log in
-                </Button>
-            </Form.Item>
-            <Form.Item>
-                <Link to='#forgotpasswordlink'>Forgot Password?</Link>
-            </Form.Item>
-        </Form>
+        <div>
+            <StyledFirebaseAuth 
+                uiConfig={uiConfig}
+                firebaseAuth={firebase.auth()}
+            />
+        </div>
     )
 }
 

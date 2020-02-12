@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Menu, Dropdown, Icon, Avatar } from 'antd'
-import { UserContext } from '../contexts/UserContext'
+import firebase from 'firebase'
 
 const Navbar = () => {
 
-    const { email } = useContext(UserContext)
+    let history = useHistory()
 
     const [current, setCurrent] = useState(window.location.pathname)
 
@@ -15,10 +15,15 @@ const Navbar = () => {
         setCurrent(currentLocation)
     }
 
+    const logout = async () => {
+      await firebase.auth().signOut()
+      history.push('/')
+    }
+
     const menu = (
         <Menu>
             <Menu.Item>
-                <Link to='/'>Logout</Link>
+                <Link to='/' onClick={() => logout()}>Logout</Link>
             </Menu.Item>
         </Menu >
     )
@@ -27,17 +32,17 @@ const Navbar = () => {
         <div className='ComponentNav'>
             <Menu onClick={handleClick} selectedKeys={current} mode="horizontal">
                 <Menu.Item key="dashboard" >
-                    <Link to='/dashboard'>Dashboard</Link>
+                    <Link to='/dashboard'><b>Dashboard</b></Link>
                 </Menu.Item>
                 <Menu.Item key="courses">
-                    <Link to='/courses'>Courses</Link>
+                    <Link to='/courses'><b>Courses</b></Link>
                 </Menu.Item>
-                <Menu.Item key="settings">
-                    <Link to='/settings'>Settings</Link>
-                </Menu.Item>
+                {/* <Menu.Item key="settings">
+                    <Link to='/settings'><b>Settings</b></Link>
+                </Menu.Item> */}
                 <Dropdown overlay={menu} className='navDrop'>
                     <a className='ant-dropdown-link' href='#'>
-                        <Avatar /> {email} <Icon type='down' />
+                    <img className='logo' style={{ marginRight: '5px' }} src={firebase.auth().currentUser.photoURL} /> {firebase.auth().currentUser.displayName} <Icon type='down' />
                     </a>
                 </Dropdown>
             </Menu>

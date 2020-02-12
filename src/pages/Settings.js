@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
-import { UserContext } from '../contexts/UserContext'
+import FooterContent from '../components/FooterContent'
 import { Row, Col } from 'antd'
 import ProfileUpload from '../components/ProfileUpload'
 import AccountDetailsForm from '../components/AccountDetailsForm'
@@ -8,24 +8,23 @@ import ChangePasswordForm from '../components/ChangePasswordForm'
 
 const Settings = () => {
 
-    const { email } = useContext(UserContext)
-
     return (
         <div>
             <Navbar />
             <div className='ComponentContainer'>
                 <Row gutter={20}>
-                    <Col span={5}>
+                    <Col xs={24} sm={24} md={8} lg={8}>
                         <ProfileUpload />
                     </Col>
-                    <Col span={12}>
+                    <Col xs={24} sm={24} md={8} lg={8}>
                         <AccountDetailsForm />
                     </Col>
-                    <Col span={7}>
+                    <Col xs={24} sm={24} md={8} lg={8}>
                         <ChangePasswordForm />
                     </Col>
                 </Row>
             </div>
+            <FooterContent />
         </div>
     )
 }
