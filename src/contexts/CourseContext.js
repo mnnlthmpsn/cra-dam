@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
-import { custom_host_courses } from '../components/Links'
+import { prod_host } from '../components/Links'
 
 
 export const CourseContext = createContext()
@@ -14,7 +14,7 @@ const CourseContextProvider = (props) => {
     })
 
     const getCourses = async () => {
-        const res = await axios.get(custom_host_courses,)
+        const res = await axios.get(`${prod_host}/courses`,)
         let data = res.data
         setCourses(data)
         localStorage.setItem('courses', JSON.stringify(courses))

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { List } from 'antd'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
+
 
 const CourseTitles = () => {
 
