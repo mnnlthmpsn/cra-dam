@@ -17,12 +17,12 @@ const Dashboard = () => {
 
     const AddCourse = () => {
         setLoading(true)
-        history.push('/courses')
+        history.push('/departments')
     }
 
     const RemoveMyCourse = (item) => {
         RemoveCourse(item.id)
-        message.warning(`${item.name} removed from Library`)
+        message.warning(`${item.title} removed from Library`)
     }
 
     const ReadCourse = (item) => {
@@ -59,8 +59,8 @@ const Dashboard = () => {
                                 >
                                     <List.Item.Meta
                                         avatar={<Avatar />}
-                                        title={item.name}
-                                        description={item.institution}
+                                        title={item.title}
+                                        description={`Course Code: ${item.code}`}
                                     />
                                 </List.Item>
                             )}
@@ -69,12 +69,12 @@ const Dashboard = () => {
                     <div className='col-button'>
                         <Form>
                             <Form.Item>
-                                <Button onClick={AddCourse} type='primary' loading={loading}>Add Courses</Button>
+                                <Button onClick={AddCourse} type='primary' loading={loading}>Course Catalog</Button>
                             </Form.Item>
                         </Form>
                     </div>
                 </Col>
-                <Col span={7} className='event'>
+                <Col xs={24} sm={24} md={7} lg={7} className='event'>
                     <Event />
                 </Col>
             </Row>

@@ -1,10 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { List } from 'antd'
-import { CourseContext } from '../contexts/CourseContext'
 
 const Event = () => {
-
-    const { courses } = useContext(CourseContext)
 
     return (
         <div>

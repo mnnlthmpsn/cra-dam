@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Menu, Button, Modal } from 'antd'
 import LoginForm from './LoginForm'
-import SignUpForm from './SignUpForm'
 import logo from '../assets/img/d-logo.png'
 
 
 const HomeNav = () => {
 
-    let history = useHistory()
 
     const [LoginIsVisible, setLoginIsVisible] = useState(false)
 
@@ -29,7 +27,7 @@ const HomeNav = () => {
         <div className='HomeNav'>
             <Menu onClick={handleClick} selectedKeys={current} mode="horizontal">
                 <Menu.Item key="home">
-                    <Link to='/'><img className='logo' src={logo} /></Link>
+                    <Link to='/'><img className='logo' src={logo} alt='damzinium' /></Link>
                 </Menu.Item>
                 <Menu.Item key="contact" className='items'>
                     <Link to='/contact'><b>Contact</b></Link>
@@ -39,9 +37,9 @@ const HomeNav = () => {
                 </Menu.Item>
                 <div className='navForm navDrop'>
                     <div>
-                        <Button type='primary' onClick={() => showLoginModal()}>Get Started</Button>
+                        <Button type='primary' onClick={showLoginModal}>Study Now</Button>
                         <Modal
-                            title='Get Started'
+                            title='Login'
                             visible={LoginIsVisible}
                             onCancel={() => setLoginIsVisible(false)}
                             footer={[]}

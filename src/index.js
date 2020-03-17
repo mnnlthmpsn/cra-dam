@@ -11,11 +11,13 @@ import CourseContextProvider from './contexts/CourseContext';
 import MyCourseContextProvider from './contexts/MyCourseContext'
 import TopicContextProvider from './contexts/TopicContext';
 import SubTopicContextProvider from './contexts/SubTopicContext';
+import DepartmentContextProvider from './contexts/DepartmentContext';
 
 
 
 ReactDOM.render(
-    <CourseContextProvider>
+    <DepartmentContextProvider>
+        <CourseContextProvider>
         <MyCourseContextProvider>
             <TopicContextProvider>
                 <SubTopicContextProvider>
@@ -28,6 +30,7 @@ ReactDOM.render(
             </TopicContextProvider>
         </MyCourseContextProvider>
     </CourseContextProvider>
+    </DepartmentContextProvider>
     ,
     document.getElementById('root'));
 

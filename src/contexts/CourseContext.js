@@ -8,16 +8,12 @@ export const CourseContext = createContext()
 const CourseContextProvider = (props) => {
 
 
-    const [courses, setCourses] = useState(() => {
-        const localData = localStorage.getItem('courses')
-        return localData ? JSON.parse(localData): []
-    })
+    const [courses, setCourses] = useState([])
 
     const getCourses = async () => {
-        const res = await axios.get(`${prod_host}/courses`,)
+        const res = await axios.get(`${prod_host}/departments/?is_active=true`,)
         let data = res.data
         setCourses(data)
-        localStorage.setItem('courses', JSON.stringify(courses))
     }
 
     useEffect(() => {
@@ -25,7 +21,7 @@ const CourseContextProvider = (props) => {
     },[])
     
     return(
-        <CourseContext.Provider value={{courses, setCourses}}>
+        <CourseContext.Provider value={{courses, setCourses, getCourses}}>
             { props.children }
         </CourseContext.Provider>
     )

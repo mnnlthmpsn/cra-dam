@@ -1,22 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Navbar from '../components/Navbar'
 import Event from '../components/Event'
 import FooterContent from '../components/FooterContent'
-import { Row, Col, List, Button, Avatar, message } from 'antd'
-import { CourseContext } from '../contexts/CourseContext'
-import { MyCourseContext } from '../contexts/MyCourseContext'
+import { Row, Col, List, Button, Avatar } from 'antd'
+import { DepartmentContext } from '../contexts/DepartmentContext'
 import { useHistory } from 'react-router-dom'
 
-const Courses = () => {
+const Departments = () => {
 
     const history = useHistory()
 
-    const { courses } = useContext(CourseContext)
-    const { AddCourse } = useContext(MyCourseContext)
+    const { departments, getDepartmentCourses } = useContext(DepartmentContext)
+    const [isLoading, setIsLoading] = useState(false)
 
-    const AddToMyCourse = (item) => {
-        AddCourse(item)
-        message.success(`${item.name} added to Library`)
+    const DepartmentDetail = (item) => {
+        setIsLoading(true)
+        history.push(`/department/${item}/courses/`)
+        getDepartmentCourses(item)
     }
 
     return (
@@ -36,12 +36,13 @@ const Courses = () => {
                                 },
                                 pageSize: 4
                             }}
-                            dataSource={courses}
+                            dataSource={departments}
                             renderItem={item => (
                                 <List.Item
                                     key={item.id}
                                     extra={
-                                        <Button onClick={() => AddToMyCourse(item)} type='primary'>Add</Button>
+                                        // <Button onClick={() => AddToMyCourse(item)} type='primary'>Add</Button>
+                                        <Button onClick={() => DepartmentDetail(item.id)} type='primary' loading={isLoading}>View Courses</Button>
                                     }
                                 >
                                     <List.Item.Meta
@@ -59,7 +60,7 @@ const Courses = () => {
                         }} type='primary'>Return to Library</Button>
                     </div>
                 </Col>
-                <Col span={7} className='event '>
+                <Col xs={24} sm={24} md={7} lg={7} className='event'>
                     <Event />
                 </Col>
             </Row>
@@ -68,4 +69,4 @@ const Courses = () => {
     )
 }
 
-export default Courses
+export default Departments

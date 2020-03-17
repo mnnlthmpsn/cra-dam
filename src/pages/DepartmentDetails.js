@@ -2,21 +2,30 @@ import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
 import { Col, Row, List, Button } from 'antd'
 import Event from '../components/Event'
+import { DepartmentContext } from '../contexts/DepartmentContext'
+import { MyCourseContext } from '../contexts/MyCourseContext'
 import { TopicContext } from '../contexts/TopicContext'
-import { SubTopicContext } from '../contexts/SubTopicContext'
 import { useHistory } from 'react-router'
+import { message } from 'antd'
 
 
-const CourseDetails = props => {
+const DepartmentDetails = props => {
 
     const history = useHistory()
 
-    const { topics } = useContext(TopicContext)
-    const { getSubTopics } = useContext(SubTopicContext)
+    const { departmentCourses } = useContext(DepartmentContext)
+    const { AddCourse } = useContext(MyCourseContext)
+    const { getTopics } = useContext(TopicContext)
 
-    const ReadTopic = (item) => {
-        getSubTopics(item.id)
-        history.push(`/topic/${item.id}`)
+
+    const ReadCourse = (item) => {
+        getTopics(item.id)
+        history.push(`/course/${item.id}`)
+    }
+
+    const AddToLibrary = item => {
+        AddCourse(item)
+        message.success(`${item.title} added to Library successfully`)
     }
 
     return (
@@ -35,12 +44,13 @@ const CourseDetails = props => {
                                 },
                                 pageSize: 10
                             }}
-                            dataSource={topics}
+                            dataSource={departmentCourses}
                             renderItem={item => (
                                 <List.Item key={item.id} 
                                     extra={
                                         <div>
-                                            <Button type='primary' onClick={() => ReadTopic(item)}>Continue</Button>
+                                            <Button type='primary' onClick={() => ReadCourse(item)}>Continue</Button>
+                                            <Button type='default' onClick={() => AddToLibrary(item)} style={{ marginLeft: 10 }}>Add to Library</Button>
                                         </div>
                                     }
                                 >
@@ -55,6 +65,9 @@ const CourseDetails = props => {
                         <Button onClick={() => {
                             history.push('/dashboard')
                         }} type='primary'>Return to Library</Button>
+                        <Button onClick={() => {
+                            history.push('/departments')
+                        }} style={{marginLeft: '1%'}}>Return to Catalog</Button>
                     </div>
                 </Col>
                 <Col span={7} className='event'>
@@ -65,4 +78,4 @@ const CourseDetails = props => {
     )
 }
 
-export default CourseDetails
+export default DepartmentDetails
