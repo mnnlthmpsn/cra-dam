@@ -15,6 +15,7 @@ const DepartmentContextProvider = (props) => {
         let data = res.data
         setDepartment(data)
     }
+    
     const getDepartmentCourses = async (id) => {
         const res = await axios.get(`${prod_host}/departments/${id}/courses/?is_active=true`,)
         let data = res.data
