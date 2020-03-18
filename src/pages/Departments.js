@@ -2,9 +2,11 @@ import React, { useState, useContext } from 'react'
 import Navbar from '../components/Navbar'
 import Event from '../components/Event'
 import FooterContent from '../components/FooterContent'
-import { Row, Col, List, Button, Avatar } from 'antd'
+import { Row, Col, List, Button } from 'antd'
 import { DepartmentContext } from '../contexts/DepartmentContext'
 import { useHistory } from 'react-router-dom'
+import logo from '../assets/img/d-logo.png'
+
 
 const Departments = () => {
 
@@ -46,7 +48,7 @@ const Departments = () => {
                                     }
                                 >
                                     <List.Item.Meta
-                                        avatar={<Avatar />}
+                                        avatar={<img className='logo' src={logo} alt='damzinium' />}
                                         title={item.name}
                                         description={item.insitution}
                                     />

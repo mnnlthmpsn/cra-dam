@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
+import FooterContent from '../components/FooterContent'
 import { Col, Row, List, Button } from 'antd'
 import Event from '../components/Event'
 import { DepartmentContext } from '../contexts/DepartmentContext'
@@ -74,6 +75,7 @@ const DepartmentDetails = props => {
                     <Event />
                 </Col>
             </Row>
+            <FooterContent />
         </div>
     )
 }

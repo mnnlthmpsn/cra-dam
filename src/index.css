@@ -113,7 +113,9 @@ body {
   background: #164d08;
   position: fixed;
   bottom: 0;
-  width: 100%
+  width: 100%;
+  margin-bottom: -20px;
+  text-align: center;
 }
 
 .ant-carousel .slick-slide {
@@ -129,6 +131,12 @@ body {
 
 .logo {
   width: 25px;
+  height: 25px;
+  margin: 0;
+}
+
+.mailto {
+  width: 35px;
   height: 25px;
   margin: 0;
 }

@@ -37,9 +37,9 @@ function App() {
           <Route path='/' component={Home} exact />
           <ProtectedRoute path='/dashboard' component={Dashboard} />
           <ProtectedRoute path='/departments' component={Departments} />
-          <ProtectedRoute path='/department/:department_id/courses/' component={DepartmentDetails} />
-          <ProtectedRoute path='/course/:course_id/' component={CourseDetails} />
-          <ProtectedRoute path='/topic/:topic_id/' component={TopicDetails} />
+          <Route path='/department/:department_id/courses/' component={DepartmentDetails} />
+          <Route path='/course/:course_id/' component={CourseDetails} />
+          <Route path='/topic/:topic_id/' component={TopicDetails} />
           <Route path='/about' component={About} />
           <Route path='/contact' component={Contact} />
           <Route path='*' component={PageNotFound} />  

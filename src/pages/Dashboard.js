@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react'
 import Navbar from '../components/Navbar'
 import FooterContent from '../components/FooterContent'
-import { Button, List, Avatar, Row, Col, message, Form } from 'antd'
+import { Button, List, Row, Col, message, Form } from 'antd'
 import { useHistory } from 'react-router-dom'
 import Event from '../components/Event'
 import { MyCourseContext } from '../contexts/MyCourseContext'
 import { TopicContext } from '../contexts/TopicContext'
+import logo from '../assets/img/d-logo.png'
+
 
 const Dashboard = () => {
 
@@ -58,7 +60,7 @@ const Dashboard = () => {
                                     }
                                 >
                                     <List.Item.Meta
-                                        avatar={<Avatar />}
+                                        avatar={<img className='logo' src={logo} alt='damzinium' />}
                                         title={item.title}
                                         description={`Course Code: ${item.code}`}
                                     />
