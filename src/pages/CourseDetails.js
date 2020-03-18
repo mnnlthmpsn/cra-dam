@@ -58,7 +58,7 @@ const CourseDetails = () => {
                         }} type='primary'>Return to Library</Button>
                     </div>
                 </Col>
-                <Col span={7} className='event'>
+                <Col xs={24} sm={24} md={7} lg={7} className='event'>
                     <Event />
                 </Col>
             </Row>

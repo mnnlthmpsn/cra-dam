@@ -8,7 +8,7 @@ const Event = () => {
  
 
     const getNews = async () => {
-        const res = await axios.get('http://newsapi.org/v2/top-headlines?sources=google-news&apiKey=4d9ad1e36f0e4d139bd250d4d4f9ea92')
+        const res = await axios.get('https://newsapi.org/v2/top-headlines?sources=google-news&apiKey=4d9ad1e36f0e4d139bd250d4d4f9ea92')
         let data = res.data.articles
         var top_5_news = data.slice(0,5)
         setNews(top_5_news)

@@ -71,7 +71,7 @@ const DepartmentDetails = props => {
                         }} style={{marginLeft: '1%'}}>Return to Catalog</Button>
                     </div>
                 </Col>
-                <Col span={7} className='event'>
+                <Col xs={24} sm={24} md={7} lg={7} className='event'>
                     <Event />
                 </Col>
             </Row>

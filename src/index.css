@@ -10,7 +10,7 @@ body {
 
 .HomeNav{
   width: 90%;
-  margin: auto;
+  margin-left: 5%;
 }
 
 .items {
@@ -20,6 +20,7 @@ body {
 .content {
   width: 90%;
   margin: auto;
+  padding: 80px;
 }
 
 .ComponentNav{
@@ -106,15 +107,12 @@ body {
 .settingsHeader{
   border-radius: 15px;
   padding: 15px 0 15px 0;   
-  margin: auto
+  margin: auto;
 }
 
 .footer {
   background: #164d08;
-  position: fixed;
-  bottom: 0;
   width: 100%;
-  margin-bottom: -20px;
   text-align: center;
 }
 
