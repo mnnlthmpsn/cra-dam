@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import Navbar from '../components/Navbar'
+import FooterContent from '../components/FooterContent'
 import { Col, Row, List, Button } from 'antd'
 import Event from '../components/Event'
 import { TopicContext } from '../contexts/TopicContext'
@@ -7,7 +8,7 @@ import { SubTopicContext } from '../contexts/SubTopicContext'
 import { useHistory } from 'react-router'
 
 
-const CourseDetails = props => {
+const CourseDetails = () => {
 
     const history = useHistory()
 
@@ -61,6 +62,7 @@ const CourseDetails = props => {
                     <Event />
                 </Col>
             </Row>
+            <FooterContent />
         </div>
     )
 }
