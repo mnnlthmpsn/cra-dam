@@ -9,7 +9,7 @@ const AuthNav = () => {
                 <div className="collapse navbar-collapse" id="navcol-1">
                     <ul className="nav navbar-nav d-flex flex-row flex-grow-1 justify-content-around">
                         <Link to='/'><li className="nav-item" role="presentation"><span className="nav-link text-white"  style={{ marginTop: "12px" }}><img src={logo} alt='damzinum' className='logo' /></span></li></Link>
-                        <Link to='/explore/auth'><li className="nav-item" role="presentation"><span className="nav-link text-white" style={{ marginTop: "12px" }}></span></li></Link>
+                        <Link to='/dashboard'><li className="nav-item" role="presentation"><span className="nav-link text-white" style={{ marginTop: "15px" }}>Dashboard</span></li></Link>
                         <li className="nav-item" role="presentation"><a className="nav-link" href="#" style={{ marginTop: "12px" }}><span style={{ marginLeft: "19px", marginTop: "-6px" }}>Avatar here</span><button className="btn btn-outline-light" type="button" style={{ marginLeft: "19px", marginTop: "-6px" }}>Logout</button></a></li>
                     </ul>
                 </div>
