@@ -14,7 +14,7 @@ const Explore = () => {
                     <div className="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                         <div className="product-container">
                             <div className="row">
-                                <div className="col-md-12"><a href="#" className="product-image"><img src="assets/img/iphone6.jpg" /></a></div>
+                                <div className="col-md-12"><a href="#" className="product-image"><img src="../../assets/img/iphone6.jpg" /></a></div>
                             </div>
                             <div className="row">
                                 <div className="col-8">

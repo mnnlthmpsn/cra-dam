@@ -6,6 +6,7 @@ import Explore from './pages/explore'
 import CategoryCourses from './pages/category_courses'
 import CourseDetail from './pages/course_detail'
 import StudyPage from './pages/study_page'
+import Dashboard from './pages/dashboard'
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                     <Route path='/catalog' component={CategoryCourses} />
                     <Route path='/course/:course_id/detail' component={CourseDetail} />
                     <Route path='/course/:course_id/study' component={StudyPage} />
+                    <Route path='/dashboard' component={Dashboard} />
                 </Switch>
             </main>
         </div>
