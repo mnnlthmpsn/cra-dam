@@ -1,64 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-// components
-import HomeNav from './components/HomeNav'
-import FooterContent from './components/FooterContent'
-import Home from './pages/Home'
-import About from './pages/About'
-import Departments from './pages/Departments'
-import DepartmentDetails from './pages/DepartmentDetails'
-import CourseDetails from './pages/CourseDetails'
-import Dashboard from './pages/Dashboard'
-import Contact from './pages/Contact'
-import TopicDetails from './pages/TopicDetails'
-import PageNotFound from './pages/PageNotFound'
-import { ProtectedRoute } from './components/ProtectedRoute'
-import firebase from '../src/firebase'
-import { Spin, Icon } from 'antd'
+import Landing from './pages/landing'
+import Explore from './pages/explore'
+import CategoryCourses from './pages/category_courses'
+import CourseDetail from './pages/course_detail'
+import StudyPage from './pages/study_page'
 
-
-function App() {
-
-  const [firebaseInitialized, setFirebaseInitialized] = useState(false)
-  const antIcon = <Icon type='loading' />
-
-  useEffect(() => {
-    firebase.isInitialized().then(val => {
-      setFirebaseInitialized(val)
-    })
-  })
-
-  return firebaseInitialized !== false ? (
-    <div className='App'>
-      <main>
-        {/* routes */}
-        <Switch>
-          <Route path='/' component={Home} exact />
-          <ProtectedRoute path='/dashboard' component={Dashboard} />
-          <ProtectedRoute path='/departments' component={Departments} />
-          <Route path='/department/:department_id/courses/' component={DepartmentDetails} />
-          <Route path='/course/:course_id/' component={CourseDetails} />
-          <Route path='/topic/:topic_id/' component={TopicDetails} />
-          <Route path='/about' component={About} />
-          <Route path='/contact' component={Contact} />
-          <Route path='*' component={PageNotFound} />  
-        </Switch>
-      </main>
-    </div>
-  ): <div>
-    {/* set loader here */}
-    <div className='App'>
-      <HomeNav />
-      <div className='loader'>
-        <Spin 
-          size='large'
-          indicator={antIcon}
-        />
-      </div>
-      <FooterContent />
-    </div>
-  </div>
+const App = () => {
+    return (
+        <div className='App'>
+            <main>
+                {/* routes */}
+                <Switch>
+                    <Route path='/' component={Landing} exact />
+                    <Route path='/explore' component={Explore} />
+                    <Route path='/catalog' component={CategoryCourses} />
+                    <Route path='/course/:course_id/detail' component={CourseDetail} />
+                    <Route path='/course/:course_id/study' component={StudyPage} />
+                </Switch>
+            </main>
+        </div>
+    )
 }
 
-export default App;
+export default App
