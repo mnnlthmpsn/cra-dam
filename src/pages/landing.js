@@ -84,7 +84,7 @@ const Landing = () => {
                                 <p className="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
                             Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
                             </div>
-                            <div className="author"><img className="rounded-circle" src="assets/img/1.jpg" />
+                            <div className="author"><img className="rounded-circle" src="assets/img/1.jpg"/>
                                 <h5 className="name">Ben Johnson</h5>
                                 <p className="title">CEO of Company Inc.</p>
                             </div>
