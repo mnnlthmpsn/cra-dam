@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import AuthNav from '../components/authnav'
+import Nav from '../components/nav'
 import Footer from '../components/footer'
 
 const Dashboard = () => {
@@ -21,10 +21,9 @@ const Dashboard = () => {
 
     return (
         <div>
-            <AuthNav />
+            <Nav />
             <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Enrolled Courses</h4>
             <div className="container">
-
                 <div className="row">
                     <div className="col-12 col-sm-24 col-md-24 col-lg-24">
                         <div className="card">
@@ -41,7 +40,7 @@ const Dashboard = () => {
                             <div className="card-body">
                                 <div className="tab-content mt-3">
                                     <div className="tab-pane active" id="first" role="tabpanel" aria-labelledby="description-tab">
-                                        <h4 class="card-title">Enrolled Courses</h4>
+                                        <h4 className="card-title">Enrolled Courses</h4>
                                         <p className="card-text">Courses you've started studying</p>
                                         {/* Enrolled courses go here */}
                                         <div class="container">

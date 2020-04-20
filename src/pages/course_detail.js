@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import AuthNav from '../components/authnav'
+import Nav from '../components/nav'
 import Footer from '../components/footer'
 
 const CourseDetail = () => {
     return (
         <div>
-            <AuthNav />
+            <Nav />
             <h4 className="text-center" style={{marginTop: "24px",marginBottom: "24px"}}>Artificial Intelligence</h4>
             <div className="container text-center d-flex flex-column justify-content-center align-items-center align-content-center">
                 <div className="card" style={{width: "80%"}}>

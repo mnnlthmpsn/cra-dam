@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ExploreNav from '../components/explorenav'
+import Nav from '../components/nav'
 import Footer from '../components/footer'
 
 const Explore = () => {
 
     return (
         <div>
-            <ExploreNav />
+            <Nav />
             <div className="d-flex flex-row flex-grow-1 justify-content-center align-items-center" style={{ minHeight: "25px" }}><input className="border rounded border-success justify-content-center align-items-center align-content-center" type="search" style={{ width: "277px", marginTop: "25px", height: "40px", padding: "9px" }} /></div>
             <div className='d-flex flex-row flex-grow-1 justify-content-center align-items-center' id="searchItem"></div>
             <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Course Catalog</h4>

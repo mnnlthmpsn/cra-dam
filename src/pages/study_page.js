@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AuthNav from '../components/authnav'
+import Nav from '../components/nav'
 import Footer from '../components/footer'
 import { List, Avatar } from 'antd'
 
@@ -13,7 +13,7 @@ const StudyPage = () => {
 
     return (
         <div>
-            <AuthNav />
+            <Nav />
             <div className='container text-center'>
                 <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Artificial Intelligence</h4>
                 <div style={{ minHeight: '50vh', alignItems: 'center' }}>

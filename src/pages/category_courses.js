@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import UnAuthNav from '../components/unauthnav'
+import Nav from '../components/nav'
 import Footer from '../components/footer'
 
 const CategoryCourses = () => {
     return (
         <div>
-            <UnAuthNav />
+            <Nav />
             <h4 class="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Computer Science</h4>
             <div class="container">
                 <div class="row product-list dev">

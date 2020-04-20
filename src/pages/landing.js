@@ -1,13 +1,14 @@
-import React from 'react'
-import UnAuthNav from '../components/unauthnav'
+import React, { useContext } from 'react'
+import Nav from '../components/nav'
 import Footer from '../components/footer'
 import { Link } from 'react-router-dom'
 
 
 const Landing = () => {
+
     return (
         <div>
-            <UnAuthNav />
+            <Nav />
             <section className="d-flex d-lg-flex justify-content-lg-center align-items-lg-center" style={{minHeight: "70vh",backgroundColor: "rgba(94,89,67,0.69)", marginTop: "-26px", backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/img/banner2.jpg'})`, backgroundRepeat: "no-repeat" ,backgroundSize: "cover", backgroundPosition: "center", color: "rgb(0,0,0)"}}>
                 <div className="text-center d-flex d-lg-flex flex-column flex-grow-1 align-items-center align-content-center flex-wrap align-items-lg-center">
                     <h3 className="text-center d-lg-flex justify-content-lg-center" style={{marginTop: "0px",paddingTop: "125px"}}>Welcome to Damzinium</h3><Link to='/explore'><button className="btn btn-success" type="button" data-bs-hover-animate="rubberBand" style={{width: "100px",marginTop: "16px"}}>Explore</button></Link></div>
