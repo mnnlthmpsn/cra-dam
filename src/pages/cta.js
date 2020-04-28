@@ -18,7 +18,7 @@ const CTA = () => {
             firebase
                 .doSignInWithGoogle()
                 .then(() => {
-                    history.push('/dashboard')
+                    window.location.replace('/dashboard')
                 })
                 .catch(err => {
                     setError(err)
