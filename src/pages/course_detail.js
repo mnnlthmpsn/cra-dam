@@ -6,6 +6,8 @@ import axios from 'axios'
 import { AuthContext } from '../context/authcontext'
 import { EnrolledCoursesContext } from '../context/enrolledcoursescontext'
 import Spinner from '../components/spinner'
+import { home } from '../components/links'
+
 
 const CourseDetail = () => {
 
@@ -18,7 +20,7 @@ const CourseDetail = () => {
     const [errors, setErrors] = useState([])
 
     const getCourseDetails = () => {
-        axios.get(`http://dapi.herokuapp.com/api/v1/course/${course_id}/`)
+        axios.get(`${home}/api/v1/course/${course_id}/`)
             .then(res => {
                 setCourse(res.data)
                 setIsLoading(false)

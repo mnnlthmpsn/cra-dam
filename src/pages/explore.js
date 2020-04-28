@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
 import Spinner from '../components/spinner'
+import { home } from '../components/links'
 
 const Explore = () => {
 
@@ -14,7 +15,7 @@ const Explore = () => {
 
     // get all course categories here
     const getCategories = () => {
-        axios.get('http://dapi.herokuapp.com/api/v1/category/')
+        axios.get(`${home}/api/v1/category/`)
             .then(res => {
                 setCategories(res.data)
                 setIsLoading(false)

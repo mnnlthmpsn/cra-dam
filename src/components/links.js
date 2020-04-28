@@ -1,0 +1,1 @@
+export const home = "https://dapi.herokuapp.com"

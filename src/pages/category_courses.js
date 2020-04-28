@@ -4,6 +4,8 @@ import Nav from '../components/nav'
 import Footer from '../components/footer'
 import axios from 'axios'
 import Spinner from '../components/spinner'
+import { home } from '../components/links'
+
 
 const CategoryCourses = () => {
 
@@ -14,7 +16,7 @@ const CategoryCourses = () => {
     const [errors, setErrors] = useState([])
 
     const getCategoryCourses = () => {
-        axios.get(`http://dapi.herokuapp.com/api/v1/category/${category_id}/courses/`)
+        axios.get(`${home}/api/v1/category/${category_id}/courses/`)
             .then(res => {
                 setCourses(res.data)
                 setIsLoading(false)
@@ -26,7 +28,7 @@ const CategoryCourses = () => {
     }
 
     const getCategoryDetails = () => {
-        axios.get(`http://dapi.herokuapp.com/api/v1/category/${category_id}`)
+        axios.get(`${home}/api/v1/category/${category_id}`)
             .then(res => {
                 setCategory(res.data)
                 setIsLoading(false)

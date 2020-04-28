@@ -3,6 +3,8 @@ import Nav from '../components/nav'
 import Footer from '../components/footer'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { home } from '../components/links'
+
 
 
 const Landing = () => {
@@ -11,7 +13,7 @@ const Landing = () => {
     const [errors, setErrors] = useState([])
 
     const getPopularCourses = () => {
-        axios.get('http://dapi.herokuapp.com/api/v1/course/popular/')
+        axios.get(`${home}/api/v1/course/popular/`)
             .then(res => (
                 res
                     ? setPopularCourses(res.data)

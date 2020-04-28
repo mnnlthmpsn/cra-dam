@@ -5,6 +5,8 @@ import { AuthContext } from '../context/authcontext'
 import { EnrolledCoursesContext } from '../context/enrolledcoursescontext'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { home } from '../components/links'
+
 
 const StudyPage = () => {
 
@@ -24,7 +26,7 @@ const StudyPage = () => {
     )
 
     const getCourseDetails = () => {
-        axios.get(`http://dapi.herokuapp.com/api/v1/course/${course_id}/`)
+        axios.get(`${home}/api/v1/course/${course_id}/`)
             .then(res => {
                 setCourse(res.data)
                 setIsLoading(false)
@@ -35,7 +37,7 @@ const StudyPage = () => {
     }
 
     const getTopics = () => {
-        axios.get(`http://dapi.herokuapp.com/api/v1/course/${course_id}/topics/`)
+        axios.get(`${home}/api/v1/course/${course_id}/topics/`)
             .then(res => {
                 setTopics(res.data)
                 setIsLoading(false)
