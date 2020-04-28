@@ -19,7 +19,7 @@ class Firebase {
         app.initializeApp(firebaseConfig)
         this.auth = app.auth()
 
-        // google
+        // social media provider
         this.googleProvider = new app.auth.GoogleAuthProvider()
         this.facebookProvider = new app.auth.FacebookAuthProvider()
         this.twitterProvider = new app.auth.TwitterAuthProvider()

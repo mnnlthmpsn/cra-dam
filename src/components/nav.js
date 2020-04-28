@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import UnAuthNav from './unauthnav'
 import AuthNav from './authnav'
-import { UserAuthContext } from '../contexts/userAuthContext'
+import { AuthContext } from '../context/authcontext'
 
 const Nav = () => {
-    const { isAuthenticated, set_isAuthenticated } = useContext(UserAuthContext)
-
+    const { isAuthenticated } = useContext(AuthContext)
     return (
         isAuthenticated ? (
             <AuthNav />

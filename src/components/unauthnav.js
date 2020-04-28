@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import logo from './z.png'
 
 const UnAuthNav = () => {
