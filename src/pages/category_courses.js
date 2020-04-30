@@ -32,12 +32,13 @@ const CategoryCourses = () => {
             .then(res => {
                 setCategory(res.data)
                 setIsLoading(false)
-            }) .catch(err => setErrors(...errors, err))
+            }).catch(err => setErrors(...errors, err))
     }
 
     useEffect(() => {
         getCategoryDetails()
         getCategoryCourses()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

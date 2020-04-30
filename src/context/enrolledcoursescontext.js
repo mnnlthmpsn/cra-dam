@@ -7,7 +7,7 @@ export const EnrolledCoursesContextProvider = props => {
     const [ enrolledCourses, setEnrolledCourses ] = useState([])
 
     const addToEnrolledCourses = course => {
-        setEnrolledCourses(...enrolledCourses, course)
+        setEnrolledCourses([...enrolledCourses, course])
     }
 
     return(

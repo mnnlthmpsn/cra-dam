@@ -16,8 +16,9 @@ const CourseDetail = () => {
     const { addToEnrolledCourses } = useContext(EnrolledCoursesContext)
 
     const [course, setCourse] = useState([])
+    const [topics, setTopics] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [errors, setErrors] = useState([])
+    const [error, setError] = useState(null)
 
     const getCourseDetails = () => {
         axios.get(`${home}/api/v1/course/${course_id}/`)
@@ -26,13 +27,27 @@ const CourseDetail = () => {
                 setIsLoading(false)
             })
             .catch(err => {
-                setErrors(...errors, err)
+                setError({message: err.message})
                 setIsLoading(false)
             })
     }
 
+    const getCourseTopics = () => {
+        axios.get(`${home}/api/v1/course/${course_id}/topics/`)
+        .then(res => {
+            setTopics(res.data)
+            setIsLoading(false)
+        })
+        .catch(err => {
+            setError({message: err.message})
+            setIsLoading(false)
+        })
+    }
+
     useEffect(() => {
         getCourseDetails()
+        getCourseTopics()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -46,14 +61,24 @@ const CourseDetail = () => {
                             <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>{course.title}</h4>
                             <div className="container text-center d-flex flex-column justify-content-center align-items-center align-content-center">
                                 <div className="card" style={{ width: "80%" }}>
+                                {error ? <h3 className="text-center ">{error.message}</h3>: <div></div>}
                                     <div className="card-body m-sm-auto" style={{ width: "90" }}>
                                         <p className="card-title">{course.description}</p>
                                         <h6 className="text-muted card-subtitle mb-2">{course.code}</h6>
                                     </div>
                                 </div>
                                 <p style={{ width: "70%", minHeight: "100px", marginTop: "30px", marginBottom: "0px" }}>
-                                    Course Syllabus can go here
-                                    </p>
+                                    {
+                                        topics
+                                            ? topics.map(topic => (
+                                                <div key={topic.id}>
+                                                    <h3>{topic.title}</h3>
+                                                    <p>{topic.description}</p>
+                                                </div>
+                                            ))
+                                            : <p>No Topics</p>
+                                    }
+                                </p>
                                 {
                                     isAuthenticated
                                         ? <Link to={`/course/${course_id}/study`}><button onClick={() => addToEnrolledCourses(course)} className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Study Now</button></Link>

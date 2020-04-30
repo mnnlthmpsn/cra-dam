@@ -9,7 +9,7 @@ import { home } from '../components/links'
 const Explore = () => {
 
     const [categories, setCategories] = useState([])
-    const [errors, setErrors] = useState([])
+    const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
 
@@ -21,13 +21,14 @@ const Explore = () => {
                 setIsLoading(false)
             })
             .catch(err => {
-                setErrors(err)
+                setError({message: err.message})
                 setIsLoading(false)
             })
     }
 
     useEffect(() => (
         getCategories()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     ), [])
 
     return (
@@ -41,7 +42,7 @@ const Explore = () => {
                         <div className="d-flex flex-row flex-grow-1 justify-content-center align-items-center" style={{ minHeight: "25px" }}><input className="border rounded border-success justify-content-center align-items-center align-content-center" type="search" style={{ width: "277px", marginTop: "25px", height: "40px", padding: "9px" }} /></div>
                         <div className='d-flex flex-row flex-grow-1 justify-content-center align-items-center' id="searchItem"></div>
                         <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Course Catalog</h4>
-
+                        {error ? <h3 className="text-center ">{error.message}</h3>: <div></div>}
                         <div class="container">
                             <div class="row product-list dev">
                                 {
@@ -50,13 +51,12 @@ const Explore = () => {
                                             <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                                                 <div class="product-container">
                                                     <div class="row">
-                                                        <div class="col-md-12"><a href="#" class="product-image"><img src="assets/img/iphone6.jpg" /></a></div>
+                                                        <div class="col-md-12"><a href="#" class="product-image"><img src="assets/img/iphone6.jpg" alt='iphone' /></a></div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-8">
                                                             <h4 style={{ color: "black !important" }}><a href="#" style={{ color: "black" }}>{course.title}</a></h4>
                                                         </div>
-                                                        <div class="col-4"><a href="#" class="small-text"></a></div>
                                                     </div>
                                                     <div class="product-rating"><a href="#" class="small-text">15 topics</a></div>
                                                     <div class="row">

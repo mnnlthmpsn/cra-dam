@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from './z.png'
 import { FirebaseContext } from './Firebase'
 
@@ -7,7 +7,6 @@ import { FirebaseContext } from './Firebase'
 const AuthNav = () => {
 
     const firebase = useContext(FirebaseContext)
-    const history = useHistory()
 
     const logout = e => {
         e.preventDefault()
@@ -22,7 +21,7 @@ const AuthNav = () => {
                         <Link to='/'><li className="nav-item" role="presentation"><span className="nav-link text-white" style={{ marginTop: "12px" }}><img src={logo} alt='damzinum' className='logo' /></span></li></Link>
                         <Link to='/dashboard'><li className="nav-item" role="presentation"><span className="nav-link text-white" style={{ marginTop: "15px" }}>Dashboard</span></li></Link>
                         <li className="nav-item" role="presentation">
-                            <a className="nav-link" href="#" style={{ marginTop: "12px" }}>
+                            <a className="nav-link" style={{ marginTop: "12px" }}>
                                 <span style={{ marginLeft: "19px", marginTop: "-6px" }}>
                                     <img src={firebase.auth.currentUser.photoURL} style={{ marginRight: "10px", verticalAlign: 'middle', width: '30px', height: '30px', borderRadius: '50%' }} alt="..." />
                                     {firebase.auth.currentUser.displayName}

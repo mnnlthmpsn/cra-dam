@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { FirebaseContext } from '../components/Firebase'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
@@ -8,9 +7,8 @@ import Footer from '../components/footer'
 const CTA = () => {
 
     const firebase = useContext(FirebaseContext)
-    const [error, setError] = useState('')
+    const [error, setError] = useState(null)
 
-    var history = useHistory()
 
     const googleLogin = e => {
         e.preventDefault()
@@ -28,7 +26,7 @@ const CTA = () => {
                 })
         }
         else {
-            setError('check your connection')
+            setError({message:'check your connection'})
             setTimeout(() => {
                 setError(null)
             }, 5000)
@@ -51,7 +49,7 @@ const CTA = () => {
             {
                 error
                     ? <div className="container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: '10vh' }}>
-                        <p>{error}</p>
+                        <p>{error.message}</p>
                         <div className="col-md-12 col-sm-24 col-lg-4" style={{ border: '1px solid white', borderRadius: '10px', background: 'whitesmoke', padding: '20px', textAlign: 'center' }}>
                             <div >
                                 <form onSubmit={googleLogin}>

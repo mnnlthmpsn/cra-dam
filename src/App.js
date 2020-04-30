@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Route, Switch, useHistory } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Landing from './pages/landing'
 import Explore from './pages/explore'
@@ -17,8 +17,6 @@ import Spinner from './components/spinner'
 
 
 const App = () => {
-
-    const history = useHistory()
 
     const firebase = useContext(FirebaseContext)
     const { set_isAuthenticated } = useContext(AuthContext)
@@ -38,6 +36,7 @@ const App = () => {
         firebase.auth.onAuthStateChanged(user => (
             user ? authenticated() : notAuthenticated()
         ))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -54,9 +53,11 @@ const App = () => {
                             <Route path='/explore' component={Explore} />
                             <Route path='/category/:category_id/courses/' component={CategoryCourses} />
                             <EnrolledCoursesContextProvider>
-                                <Route path='/course/:course_id/study' component={StudyPage} />
-                                <Route path='/course/:course_id/detail' component={CourseDetail} />
-                                <Route path='/dashboard' component={Dashboard} />
+                                
+                                    <Route path='/course/:course_id/study' component={StudyPage} />
+                                    <Route path='/course/:course_id/detail' component={CourseDetail} />
+                                    <Route path='/dashboard' component={Dashboard} />
+                                
                             </EnrolledCoursesContextProvider>
                         </Switch>
                     </main>
