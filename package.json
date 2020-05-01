@@ -12,6 +12,7 @@
     "enquire-js": "^0.2.1",
     "express": "^4.17.1",
     "firebase": "^7.14.1",
+    "html-react-parser": "^0.10.3",
     "jquery": "^3.5.0",
     "rc-tween-one": "^2.6.8",
     "react": "^16.12.0",

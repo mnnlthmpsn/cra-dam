@@ -53,11 +53,9 @@ const App = () => {
                             <Route path='/explore' component={Explore} />
                             <Route path='/category/:category_id/courses/' component={CategoryCourses} />
                             <EnrolledCoursesContextProvider>
-                                
-                                    <Route path='/course/:course_id/study' component={StudyPage} />
-                                    <Route path='/course/:course_id/detail' component={CourseDetail} />
-                                    <Route path='/dashboard' component={Dashboard} />
-                                
+                                <Route path='/topic/:topic_id/study' component={StudyPage} />
+                                <Route path='/course/:course_id/detail' component={CourseDetail} />
+                                <Route path='/dashboard' component={Dashboard} />
                             </EnrolledCoursesContextProvider>
                         </Switch>
                     </main>

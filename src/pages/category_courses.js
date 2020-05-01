@@ -56,7 +56,7 @@ const CategoryCourses = () => {
                                         <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                                             <div class="product-container">
                                                 <div class="row">
-                                                    <div class="col-md-12"><a href="#" class="product-image"><img src="assets/img/iphone6.jpg" /></a></div>
+                                                    <div class="col-md-12"><a href="#" class="product-image"><img src="assets/img/iphone6.jpg" alt="iphone"/></a></div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-8">

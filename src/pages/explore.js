@@ -43,27 +43,27 @@ const Explore = () => {
                         <div className='d-flex flex-row flex-grow-1 justify-content-center align-items-center' id="searchItem"></div>
                         <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Course Catalog</h4>
                         {error ? <h3 className="text-center ">{error.message}</h3>: <div></div>}
-                        <div class="container">
-                            <div class="row product-list dev">
+                        <div className="container">
+                            <div className="row product-list dev">
                                 {
                                     categories
                                         ? categories.map(course => (
-                                            <div class="col-sm-6 col-md-4 product-item animation-element slide-top-left">
-                                                <div class="product-container">
-                                                    <div class="row">
-                                                        <div class="col-md-12"><a href="#" class="product-image"><img src="assets/img/iphone6.jpg" alt='iphone' /></a></div>
+                                            <div key={course.id} className="col-sm-6 col-md-4 product-item animation-element slide-top-left">
+                                                <div className="product-container">
+                                                    <div className="row">
+                                                        <div className="col-md-12"><a href="#" className="product-image"><img src="assets/img/iphone6.jpg" alt='iphone' /></a></div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-8">
+                                                    <div className="row">
+                                                        <div className="col-8">
                                                             <h4 style={{ color: "black !important" }}><a href="#" style={{ color: "black" }}>{course.title}</a></h4>
                                                         </div>
                                                     </div>
-                                                    <div class="product-rating"><a href="#" class="small-text">15 topics</a></div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <p class="product-description">{course.description}</p>
-                                                            <div class="row">
-                                                                <Link to={`/category/${course.id}/courses`}><div class="col-6"><button class="btn btn-light" type="button" style={{ backgroundColor: "rgb(40,167,69)" }}>View Courses</button></div></Link>
+                                                    <div className="product-rating"><a href="#" className="small-text">15 topics</a></div>
+                                                    <div className="row">
+                                                        <div className="col-12">
+                                                            <p className="product-description">{course.description}</p>
+                                                            <div className="row">
+                                                                <Link to={`/category/${course.id}/courses`}><div className="col-6"><button className="btn btn-light" type="button" style={{ backgroundColor: "rgb(40,167,69)" }}>View Courses</button></div></Link>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -20,33 +20,34 @@ const CourseDetail = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
-    const getCourseDetails = () => {
-        axios.get(`${home}/api/v1/course/${course_id}/`)
+
+    const getCourseDetails = async () => {
+        await axios.get(`${home}/api/v1/course/${course_id}/`)
             .then(res => {
                 setCourse(res.data)
                 setIsLoading(false)
             })
             .catch(err => {
-                setError({message: err.message})
+                setError({ message: err.message })
                 setIsLoading(false)
             })
     }
 
-    const getCourseTopics = () => {
-        axios.get(`${home}/api/v1/course/${course_id}/topics/`)
-        .then(res => {
-            setTopics(res.data)
-            setIsLoading(false)
-        })
-        .catch(err => {
-            setError({message: err.message})
-            setIsLoading(false)
-        })
+    const getCourseTopics = async () => {
+        await axios.get(`${home}/api/v1/course/${course_id}/topics/`)
+            .then(res => {
+                setTopics(res.data)
+                setIsLoading(false)
+            })
+            .catch(err => {
+                setError({ message: err.message })
+                setIsLoading(false)
+            })
     }
 
     useEffect(() => {
-        getCourseDetails()
         getCourseTopics()
+        getCourseDetails()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -61,27 +62,29 @@ const CourseDetail = () => {
                             <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>{course.title}</h4>
                             <div className="container text-center d-flex flex-column justify-content-center align-items-center align-content-center">
                                 <div className="card" style={{ width: "80%" }}>
-                                {error ? <h3 className="text-center ">{error.message}</h3>: <div></div>}
+                                    {error ? <h3 className="text-center ">{error.message}</h3> : <div></div>}
                                     <div className="card-body m-sm-auto" style={{ width: "90" }}>
                                         <p className="card-title">{course.description}</p>
                                         <h6 className="text-muted card-subtitle mb-2">{course.code}</h6>
                                     </div>
                                 </div>
-                                <p style={{ width: "70%", minHeight: "100px", marginTop: "30px", marginBottom: "0px" }}>
+                                <h5 className="text-center mt-5">Course Content</h5>
+                                <div style={{ width: "70%", minHeight: "100px", marginTop: "30px", marginBottom: "0px" }}>
                                     {
                                         topics
                                             ? topics.map(topic => (
                                                 <div key={topic.id}>
-                                                    <h3>{topic.title}</h3>
+                                                    <Link to={`/topic/${topic.id}/study`}><h6>{topic.title}</h6></Link>
                                                     <p>{topic.description}</p>
                                                 </div>
                                             ))
                                             : <p>No Topics</p>
                                     }
-                                </p>
+                                </div>
                                 {
                                     isAuthenticated
-                                        ? <Link to={`/course/${course_id}/study`}><button onClick={() => addToEnrolledCourses(course)} className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Study Now</button></Link>
+                                        ? console.log(topics)
+                                        // ? <Link to={`/topic/${topics.first.id}/study`}><button onClick={() => addToEnrolledCourses(course)} className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Study Now</button></Link>
                                         : <Link to='/cta'><button className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Login to Study</button></Link>
                                 }
                             </div>
