@@ -2,7 +2,8 @@ import React, { useEffect, useContext, useState } from 'react'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
 import { AuthContext } from '../context/authcontext'
-import { useParams } from 'react-router-dom'
+import { CompletedCourseContext } from '../context/completedcoursescontext'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import parse from 'html-react-parser'
 import { home } from '../components/links'
@@ -12,7 +13,9 @@ import Spinner from '../components/spinner'
 const StudyPage = () => {
 
     const { isAuthenticated } = useContext(AuthContext)
+    const { set_completedCourses } = useContext(CompletedCourseContext)
     const { topic_id } = useParams()
+    const history = useHistory()
 
     const [topic, setTopic] = useState([])
     const [next, setNext] = useState(null)
@@ -23,11 +26,11 @@ const StudyPage = () => {
     const checkAuthStatus = () => (
         isAuthenticated
             ? 'allow him study'
-            : window.location.replace('/cta')
+            : history.push('/cta')
     )
 
-    const getCourseTopics = async () => {
-        await axios.get(`${home}/api/v1/topic/${topic_id}/contents/`)
+    const getCourseTopics = () => {
+        axios.get(`${home}/api/v1/topic/${topic_id}/contents/`)
             .then(res => {
                 setTopic(res.data)
                 setIsLoading(false)
@@ -38,8 +41,8 @@ const StudyPage = () => {
             })
     }
 
-    const getNextTopic = async () => {
-        await axios.get(`${home}/api/v1/topic/${topic_id}/get_next/`)
+    const getNextTopic = () => {
+        axios.get(`${home}/api/v1/topic/${topic_id}/get_next/`)
             .then(res => {
                 setNext(res.data)
             })
@@ -48,8 +51,8 @@ const StudyPage = () => {
             })
     }
 
-    const getPreviousTopic = async () => {
-        await axios.get(`${home}/api/v1/topic/${topic_id}/get_previous/`)
+    const getPreviousTopic = () => {
+        axios.get(`${home}/api/v1/topic/${topic_id}/get_previous/`)
             .then(res => {
                 setPrevious(res.data)
             })
@@ -64,19 +67,19 @@ const StudyPage = () => {
         getNextTopic()
         getPreviousTopic()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [topic])
 
 
     return (
         <div>
             <Nav />
-            <div className='container text-center'>
+            <div className='container'>
                 {
                     isLoading
                         ? <Spinner />
                         : <div className="col-lg-12 col-md-18 col-sm-24">
                             {error ? <h3 className="text-center ">{error.message}</h3> : <div></div>}
-                            
+
                             {
                                 topic
                                     ? <div>
@@ -85,17 +88,20 @@ const StudyPage = () => {
                                                 ? <div>
                                                     <h3 style={{ marginTop: '5%' }}>{topic.topic}</h3>
                                                     {parse(topic.content)}
-                                                    <hr style={{ width: '50vw', marginTop: '5%', marginBottom: '2%' }}/>
+                                                    <hr style={{ width: '50vw', marginTop: '5%', marginBottom: '2%' }} />
                                                     {/* pagination */}
                                                     {/* previous topic */}
                                                     <div className="d-flex flex-row flex-grow-1 justify-content-between">
                                                         <div>
                                                             {
                                                                 previous
-                                                                    ? <div onClick={() => window.location.replace(`/topic/${previous.id}/study`)}>
-                                                                        <a><strong><i class="fa fa-arrow-left"> </i> {previous.title}</strong></a>
-                                                                    </div>
-                                                                    : <div>Mark</div>
+                                                                    ? <Link to={`/topic/${previous.id}/study`}>
+                                                                        <div>
+                                                                            {/* eslint-disable-next-line */}
+                                                                            <strong><i className="fa fa-arrow-left"></i> {previous.title}</strong>
+                                                                        </div>
+                                                                    </Link>
+                                                                    : <div></div>
                                                             }
                                                         </div>
 
@@ -103,10 +109,15 @@ const StudyPage = () => {
                                                         <div>
                                                             {
                                                                 next
-                                                                    ? <div onClick={() => window.location.replace(`/topic/${next.id}/study`)}>
-                                                                        <a><strong>{next.title} <i class="fa fa-arrow-right"></i></strong></a>
+                                                                    // eslint-disable-next-line
+                                                                    ? <Link to={`/topic/${next.id}/study`}>
+                                                                        <div>
+                                                                            {/* eslint-disable-next-line */}
+                                                                            <strong>{next.title} <i className="fa fa-arrow-right"></i></strong>
+                                                                        </div></Link>
+                                                                    : <div>
+                                                                        <button className="btn btn-success btn-sm" onClick={() => set_completedCourses(topic.course)}>Completed</button>
                                                                     </div>
-                                                                    : ''
                                                             }
                                                         </div>
                                                     </div>

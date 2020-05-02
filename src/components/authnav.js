@@ -21,6 +21,7 @@ const AuthNav = () => {
                         <Link to='/'><li className="nav-item" role="presentation"><span className="nav-link text-white" style={{ marginTop: "12px" }}><img src={logo} alt='damzinum' className='logo' /></span></li></Link>
                         <Link to='/dashboard'><li className="nav-item" role="presentation"><span className="nav-link text-white" style={{ marginTop: "15px" }}>Dashboard</span></li></Link>
                         <li className="nav-item" role="presentation">
+                        {/* eslint-disable-next-line */}
                             <a className="nav-link" style={{ marginTop: "12px" }}>
                                 <span style={{ marginLeft: "19px", marginTop: "-6px" }}>
                                     <img src={firebase.auth.currentUser.photoURL} style={{ marginRight: "10px", verticalAlign: 'middle', width: '30px', height: '30px', borderRadius: '50%' }} alt="..." />

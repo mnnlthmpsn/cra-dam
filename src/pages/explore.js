@@ -5,6 +5,7 @@ import Nav from '../components/nav'
 import Footer from '../components/footer'
 import Spinner from '../components/spinner'
 import { home } from '../components/links'
+import Search from '../components/search'
 
 const Explore = () => {
 
@@ -38,9 +39,8 @@ const Explore = () => {
                 isLoading
                     ? <Spinner />
                     :
-                    <div>
-                        <div className="d-flex flex-row flex-grow-1 justify-content-center align-items-center" style={{ minHeight: "25px" }}><input className="border rounded border-success justify-content-center align-items-center align-content-center" type="search" style={{ width: "277px", marginTop: "25px", height: "40px", padding: "9px" }} /></div>
-                        <div className='d-flex flex-row flex-grow-1 justify-content-center align-items-center' id="searchItem"></div>
+                    <div style={{ marginTop: '20px' }}>
+                        <Search />
                         <h4 className="text-center" style={{ marginTop: "24px", marginBottom: "24px" }}>Course Catalog</h4>
                         {error ? <h3 className="text-center ">{error.message}</h3>: <div></div>}
                         <div className="container">
@@ -51,13 +51,16 @@ const Explore = () => {
                                             <div key={course.id} className="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                                                 <div className="product-container">
                                                     <div className="row">
+                                                    {/* eslint-disable-next-line */}
                                                         <div className="col-md-12"><a href="#" className="product-image"><img src="assets/img/iphone6.jpg" alt='iphone' /></a></div>
                                                     </div>
                                                     <div className="row">
                                                         <div className="col-8">
+                                                        {/* eslint-disable-next-line */}
                                                             <h4 style={{ color: "black !important" }}><a href="#" style={{ color: "black" }}>{course.title}</a></h4>
                                                         </div>
                                                     </div>
+                                                    {/* eslint-disable-next-line */}
                                                     <div className="product-rating"><a href="#" className="small-text">15 topics</a></div>
                                                     <div className="row">
                                                         <div className="col-12">

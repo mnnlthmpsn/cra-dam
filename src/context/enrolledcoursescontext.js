@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
 export const EnrolledCoursesContext = createContext()
 
@@ -9,6 +9,10 @@ export const EnrolledCoursesContextProvider = props => {
     const addToEnrolledCourses = course => {
         setEnrolledCourses([...enrolledCourses, course])
     }
+
+    useEffect(() => {
+        localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses))
+    }, [enrolledCourses])
 
     return(
         <EnrolledCoursesContext.Provider value={{ enrolledCourses, addToEnrolledCourses }}>

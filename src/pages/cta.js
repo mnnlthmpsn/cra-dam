@@ -1,23 +1,32 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { FirebaseContext } from '../components/Firebase'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
+import { useHistory } from 'react-router-dom'
+import { AuthContext } from '../context/authcontext'
 
 
 const CTA = () => {
 
     const firebase = useContext(FirebaseContext)
     const [error, setError] = useState(null)
+    const history = useHistory()
+    const { isAuthenticated } = useContext(AuthContext)
 
+    const checkAuthStatus = () => {
+        isAuthenticated 
+            ? history.push('/dashboard')
+            : console.log('')
+    }
 
     const googleLogin = e => {
         e.preventDefault()
         if (navigator.onLine) {
             firebase
                 .doSignInWithGoogle()
-                .then(() => {
-                    window.location.replace('/dashboard')
-                })
+                .then(() => (
+                   history.push('/dashboard')
+                ))
                 .catch(err => {
                     setError(err)
                     setTimeout(() => {
@@ -42,6 +51,11 @@ const CTA = () => {
         e.preventDefault()
         console.log('twitter login')
     }
+
+    useEffect(() => {
+        checkAuthStatus()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div>

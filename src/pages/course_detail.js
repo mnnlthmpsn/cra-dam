@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
 import axios from 'axios'
@@ -12,6 +12,7 @@ import { home } from '../components/links'
 const CourseDetail = () => {
 
     const { course_id } = useParams()
+    const history = useHistory()
     const { isAuthenticated } = useContext(AuthContext)
     const { addToEnrolledCourses } = useContext(EnrolledCoursesContext)
 
@@ -31,6 +32,12 @@ const CourseDetail = () => {
                 setError({ message: err.message })
                 setIsLoading(false)
             })
+    }
+
+    const add_toEnrolledCourses = () => {
+        const firstTopic = topics[0]
+        history.push(`/topic/${firstTopic.id}/study`)
+        addToEnrolledCourses(course)
     }
 
     const getCourseTopics = async () => {
@@ -68,13 +75,13 @@ const CourseDetail = () => {
                                         <h6 className="text-muted card-subtitle mb-2">{course.code}</h6>
                                     </div>
                                 </div>
-                                <h5 className="text-center mt-5">Course Content</h5>
+                                <h5 className="mt-5">Course Content</h5>
                                 <div style={{ width: "70%", minHeight: "100px", marginTop: "30px", marginBottom: "0px" }}>
                                     {
                                         topics
                                             ? topics.map(topic => (
                                                 <div key={topic.id}>
-                                                    <Link to={`/topic/${topic.id}/study`}><h6>{topic.title}</h6></Link>
+                                                    <Link to={`/topic/${topic.id}/study`}><h6 style={{ color: '#0000EE' }}>{topic.title}</h6></Link>
                                                     <p>{topic.description}</p>
                                                 </div>
                                             ))
@@ -83,8 +90,7 @@ const CourseDetail = () => {
                                 </div>
                                 {
                                     isAuthenticated
-                                        ? console.log(topics)
-                                        // ? <Link to={`/topic/${topics.first.id}/study`}><button onClick={() => addToEnrolledCourses(course)} className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Study Now</button></Link>
+                                        ? <button onClick={() => add_toEnrolledCourses()} className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Study Now</button>
                                         : <Link to='/cta'><button className="btn btn-success" type="button" style={{ marginTop: "43px" }}>Login to Study</button></Link>
                                 }
                             </div>

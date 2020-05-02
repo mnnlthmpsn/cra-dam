@@ -14,6 +14,7 @@ import { FirebaseContext } from './components/Firebase'
 import { AuthContext } from './context/authcontext'
 import EnrolledCoursesContextProvider from './context/enrolledcoursescontext'
 import Spinner from './components/spinner'
+import CompletedCourseContextProvider from './context/completedcoursescontext'
 
 
 const App = () => {
@@ -22,13 +23,13 @@ const App = () => {
     const { set_isAuthenticated } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(true)
 
-    const authenticated = async () => {
-        await set_isAuthenticated(true)
+    const authenticated = () => {
+        set_isAuthenticated(true)
         setIsLoading(false)
     }
 
-    const notAuthenticated = async () => {
-        await set_isAuthenticated(false)
+    const notAuthenticated = () => {
+        set_isAuthenticated(false)
         setIsLoading(false)
     }
 
@@ -52,11 +53,13 @@ const App = () => {
                             <Route path='/cta' component={CTA} />
                             <Route path='/explore' component={Explore} />
                             <Route path='/category/:category_id/courses/' component={CategoryCourses} />
-                            <EnrolledCoursesContextProvider>
-                                <Route path='/topic/:topic_id/study' component={StudyPage} />
-                                <Route path='/course/:course_id/detail' component={CourseDetail} />
-                                <Route path='/dashboard' component={Dashboard} />
-                            </EnrolledCoursesContextProvider>
+                            <CompletedCourseContextProvider>
+                                <EnrolledCoursesContextProvider>
+                                    <Route path='/topic/:topic_id/study' component={StudyPage} />
+                                    <Route path='/course/:course_id/detail' component={CourseDetail} />
+                                    <Route path='/dashboard' component={Dashboard} />
+                                </EnrolledCoursesContextProvider>
+                            </CompletedCourseContextProvider>
                         </Switch>
                     </main>
 
