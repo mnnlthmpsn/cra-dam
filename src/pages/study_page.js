@@ -8,6 +8,7 @@ import axios from 'axios'
 import parse from 'html-react-parser'
 import { home } from '../components/links'
 import Spinner from '../components/spinner'
+import { message } from 'antd'
 
 
 const StudyPage = () => {
@@ -28,6 +29,11 @@ const StudyPage = () => {
             ? 'allow him study'
             : history.push('/cta')
     )
+
+    const courseCompleted = () => {
+        set_completedCourses(topic.course)
+        message.success(`${topic.course} completed`)
+    }
 
     const getCourseTopics = () => {
         axios.get(`${home}/api/v1/topic/${topic_id}/contents/`)
@@ -86,8 +92,8 @@ const StudyPage = () => {
                                         {
                                             topic
                                                 ? <div>
-                                                    <h3 style={{ marginTop: '5%' }}>{topic.topic}</h3>
-                                                    {parse(topic.content)}
+                                                    <h3 style={{ marginTop: '2%', marginBottom: '2%' }} className="text-center">{topic.topic}</h3>
+                                                    <div className="col-lg-12 col-md-20 col-sm-24">{parse(topic.content)}</div>
                                                     <hr style={{ width: '50vw', marginTop: '5%', marginBottom: '2%' }} />
                                                     {/* pagination */}
                                                     {/* previous topic */}
@@ -96,7 +102,7 @@ const StudyPage = () => {
                                                             {
                                                                 previous
                                                                     ? <Link to={`/topic/${previous.id}/study`}>
-                                                                        <div>
+                                                                        <div onClick={() => window.scrollTo(0,0)}>
                                                                             {/* eslint-disable-next-line */}
                                                                             <strong><i className="fa fa-arrow-left"></i> {previous.title}</strong>
                                                                         </div>
@@ -111,12 +117,12 @@ const StudyPage = () => {
                                                                 next
                                                                     // eslint-disable-next-line
                                                                     ? <Link to={`/topic/${next.id}/study`}>
-                                                                        <div>
+                                                                        <div onClick={() => window.scrollTo(0,0)}>
                                                                             {/* eslint-disable-next-line */}
                                                                             <strong>{next.title} <i className="fa fa-arrow-right"></i></strong>
                                                                         </div></Link>
                                                                     : <div>
-                                                                        <button className="btn btn-success btn-sm" onClick={() => set_completedCourses(topic.course)}>Completed</button>
+                                                                        <button className="btn btn-success btn-sm" onClick={() => courseCompleted()}>Completed</button>
                                                                     </div>
                                                             }
                                                         </div>

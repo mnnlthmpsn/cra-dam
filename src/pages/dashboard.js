@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react'
 import axios from 'axios'
 import { useHistory, Link } from 'react-router-dom'
+import { message } from 'antd'
 import { home } from '../components/links'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
@@ -15,8 +16,8 @@ import Search from '../components/search'
 const Dashboard = () => {
 
     const { isAuthenticated } = useContext(AuthContext)
-    const { completedCourses } = useContext(CompletedCourseContext)
-    const { enrolledCourses } = useContext(EnrolledCoursesContext)
+    const { completedCourses, removeCourse } = useContext(CompletedCourseContext)
+    const { enrolledCourses, removeEnrolled } = useContext(EnrolledCoursesContext)
 
     const [catalog, setCatalog] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -42,6 +43,16 @@ const Dashboard = () => {
                 setError({ message: err.message })
                 setIsLoading(false)
             })
+    }
+
+    const removeMyCourse = course => {
+        removeCourse(course)
+        message.warning(`${course} removed`)
+    }
+
+    const removeMyEnrolled = course => {
+        removeEnrolled(course)
+        message.warning(`${course.title} removed`)
     }
 
     useEffect(() => {
@@ -148,6 +159,7 @@ const Dashboard = () => {
                                                                                     <p className="product-description">{course.description}</p>
                                                                                     <div className="row">
                                                                                         <Link to={`/course/${course.id}/detail`}><div className="col-6"><button className="btn btn-light" type="button" style={{ backgroundColor: "rgb(40,167,69)" }}>View Courses</button></div></Link>
+                                                                                        <button style={{ backgroundColor: 'red'}} onClick={() => removeMyEnrolled(course)}>Remove</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -171,7 +183,7 @@ const Dashboard = () => {
                                                             completedCourses
                                                                 ?
                                                                 completedCourses.map(course => (
-                                                                    <div key={course.index} className="col-sm-6 col-md-4 product-item animation-element slide-top-left">
+                                                                    <div key={course} className="col-sm-6 col-md-4 product-item animation-element slide-top-left">
                                                                         <div className="product-container">
                                                                             <div className="row">
                                                                                 {/* eslint-disable-next-line */}
@@ -189,6 +201,7 @@ const Dashboard = () => {
                                                                                     <p className="product-description">Course Completed</p>
                                                                                 </div>
                                                                             </div>
+                                                                            <button className="btn" style={{ backgroundColor: 'red'}} onClick={() => removeMyCourse(course)}>Remove</button>
                                                                         </div>
                                                                     </div>
                                                                 ))

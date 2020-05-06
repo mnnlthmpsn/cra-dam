@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
+import { message } from 'antd'
 
 export const CompletedCourseContext = createContext()
 
@@ -10,7 +11,12 @@ const CompletedCourseContextProvider = props => {
     })
 
     const set_completedCourses = courses => {
-        setCompletedCourses([...completedCourses, courses])
+        completedCourses.includes(courses) ? message.warning('Course already added') : setCompletedCourses([...completedCourses, courses])
+    }
+
+    const removeCourse = course => {
+        let newCourses = completedCourses.filter(item => item !== course)
+        setCompletedCourses(newCourses)
     }
 
     useEffect(() => {
@@ -18,7 +24,7 @@ const CompletedCourseContextProvider = props => {
     }, [completedCourses])
 
     return (
-        <CompletedCourseContext.Provider value={{ completedCourses, set_completedCourses }}>
+        <CompletedCourseContext.Provider value={{ completedCourses, set_completedCourses, removeCourse }}>
             { props.children }
         </CompletedCourseContext.Provider>
     )

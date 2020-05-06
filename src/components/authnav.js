@@ -14,7 +14,7 @@ const AuthNav = () => {
     }
 
     return (
-        <nav className="navbar navbar-dark navbar-expand-md sticky-top bg-success shadow d-lg-flex">
+        <nav className="navbar navbar-dark navbar-expand-md sticky-top bg-success shadow d-lg-flex" style={{ zIndex: '1' }}>
             <div className="container-fluid"><button className="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span className="sr-only">Toggle navigation</span><span className="navbar-toggler-icon"></span></button>
                 <div className="collapse navbar-collapse" id="navcol-1">
                     <ul className="nav navbar-nav d-flex flex-row flex-grow-1 justify-content-around">
