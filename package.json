@@ -1,29 +1,19 @@
 {
   "name": "damzinium",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8000",
+  "version": "1.0.0",
+  "description": "Damzinium Inc. Educational Platform",
+  "main": "src/index.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "antd": "^3.26.5",
-    "axios": "^0.19.1",
+    "antd": "^4.2.0",
+    "axios": "^0.19.2",
     "compression": "^1.7.4",
-    "enquire-js": "^0.2.1",
     "express": "^4.17.1",
-    "firebase": "^7.14.1",
+    "firebase": "^7.14.3",
     "html-react-parser": "^0.10.3",
-    "jquery": "^3.5.0",
-    "rc-tween-one": "^2.6.8",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-firebaseui": "^4.1.0",
-    "react-html-parser": "^2.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -52,5 +42,7 @@
   "devServer": {
     "compress": true,
     "disableHostCheck": true
-  }
+  },
+  "author": "",
+  "license": "MIT"
 }

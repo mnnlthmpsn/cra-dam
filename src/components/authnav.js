@@ -8,11 +8,6 @@ const AuthNav = () => {
 
     const firebase = useContext(FirebaseContext)
 
-    const logout = e => {
-        e.preventDefault()
-        firebase.doSignOut()
-    }
-
     return (
         <nav className="navbar navbar-dark navbar-expand-md sticky-top bg-success shadow d-lg-flex" style={{ zIndex: '1' }}>
             <div className="container-fluid"><button className="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span className="sr-only">Toggle navigation</span><span className="navbar-toggler-icon"></span></button>
@@ -27,7 +22,7 @@ const AuthNav = () => {
                                     <img src={firebase.auth.currentUser.photoURL} style={{ marginRight: "10px", verticalAlign: 'middle', width: '30px', height: '30px', borderRadius: '50%' }} alt="..." />
                                     {firebase.auth.currentUser.displayName}
                                 </span>
-                                <button onClick={e => logout(e)} className="btn btn-outline-light" type="button" style={{ marginLeft: "19px", marginTop: "-6px" }}>Logout</button>
+                                <button onClick={() => firebase.doSignOut()} className="btn btn-outline-light" type="button" style={{ marginLeft: "19px", marginTop: "-6px" }}>Logout</button>
                             </a>
                         </li>
                     </ul>

@@ -18,32 +18,30 @@ const Dashboard = () => {
     const { isAuthenticated } = useContext(AuthContext)
     const { completedCourses, removeCourse } = useContext(CompletedCourseContext)
     const { enrolledCourses, removeEnrolled } = useContext(EnrolledCoursesContext)
+    const history = useHistory()
 
     const [catalog, setCatalog] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [welcomeMsg, setWelcomeMsg] = useState('')
 
     const firebase = useContext(FirebaseContext)
-    const history = useHistory()
-
-    const checkAuthStatus = () => (
-        isAuthenticated
-            ? 'allow him study'
-            : history.push('/cta')
-    )
 
     // get all course categories here
-    const getCatalog = () => {
-        axios.get(`${home}/api/v1/category/`)
+    const getCatalog = async () => {
+        await axios.get(`${home}/api/v1/category/`)
             .then(res => {
                 setCatalog(res.data)
                 setIsLoading(false)
             })
             .catch(err => {
+
                 setError({ message: err.message })
                 setIsLoading(false)
+
             })
     }
+
 
     const removeMyCourse = course => {
         removeCourse(course)
@@ -55,17 +53,25 @@ const Dashboard = () => {
         message.warning(`${course.title} removed`)
     }
 
-    useEffect(() => {
-        checkAuthStatus()
-        getCatalog()
+
+    const checkAuth = () => {
         // eslint-disable-next-line
-    }, [enrolledCourses, completedCourses])
+        isAuthenticated
+            ? setWelcomeMsg(`Welcome ${firebase.auth.currentUser.displayName}`)
+            : history.push('/cta')
+    }
+
+    useEffect(() => {
+        checkAuth()
+        getCatalog()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated, enrolledCourses, completedCourses])
 
     return (
         <div>
             <Nav />
+            <h4 style={{ marginTop: '20px', marginBottom: '20px' }} className="text-center">{welcomeMsg}</h4>
             <div className="container">
-                {isAuthenticated ? <h4 style={{ marginTop: '20px', marginBottom: '20px' }} className="text-center">Welcome back {firebase.auth.currentUser.displayName}</h4> : 'login'}
                 <div className="row">
                     <div className="col-sm-24 col-md-24 col-lg-24 mx-auto">
                         <div className="card" style={{ width: '80vw', margin: 'auto' }}>
@@ -159,7 +165,7 @@ const Dashboard = () => {
                                                                                     <p className="product-description">{course.description}</p>
                                                                                     <div className="row">
                                                                                         <Link to={`/course/${course.id}/detail`}><div className="col-6"><button className="btn btn-light" type="button" style={{ backgroundColor: "rgb(40,167,69)" }}>View Courses</button></div></Link>
-                                                                                        <button style={{ backgroundColor: 'red'}} onClick={() => removeMyEnrolled(course)}>Remove</button>
+                                                                                        <button style={{ backgroundColor: 'red' }} onClick={() => removeMyEnrolled(course)}>Remove</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -201,7 +207,7 @@ const Dashboard = () => {
                                                                                     <p className="product-description">Course Completed</p>
                                                                                 </div>
                                                                             </div>
-                                                                            <button className="btn" style={{ backgroundColor: 'red'}} onClick={() => removeMyCourse(course)}>Remove</button>
+                                                                            <button className="btn" style={{ backgroundColor: 'red' }} onClick={() => removeMyCourse(course)}>Remove</button>
                                                                         </div>
                                                                     </div>
                                                                 ))

@@ -52,7 +52,7 @@ const App = () => {
                             <Route path='/' component={Landing} exact />
                             <Route path='/cta' component={CTA} />
                             <Route path='/explore' component={Explore} />
-                            <Route path='/category/:category_id/courses/' component={CategoryCourses} />
+                            <Route path='/category/:category_id/courses' component={CategoryCourses} />
                             <CompletedCourseContextProvider>
                                 <EnrolledCoursesContextProvider>
                                     <Route path='/topic/:topic_id/study' component={StudyPage} />
