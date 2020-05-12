@@ -1,3 +1,3 @@
 export const home = process.env === 'production'
-    ? "https://dapi.herokuapp.com"
-    : "http://localhost:8000"
+    ? return "https://dapi.herokuapp.com"
+    : return "http://localhost:8000"
