@@ -27,6 +27,18 @@ const Dashboard = () => {
 
     const firebase = useContext(FirebaseContext)
 
+    const checkAuth = () => {
+        // eslint-disable-next-line
+        isAuthenticated
+            ? fetchCourses()
+            : history.push('/cta')
+    }
+
+    const fetchCourses = async () => {
+        await getCatalog()
+        setWelcomeMsg(`Welcome ${firebase.auth.currentUser.displayName}`)
+    }
+
     // get all course categories here
     const getCatalog = async () => {
         await axios.get(`${home}/api/v1/category/`)
@@ -53,17 +65,8 @@ const Dashboard = () => {
         message.warning(`${course.title} removed`)
     }
 
-
-    const checkAuth = () => {
-        // eslint-disable-next-line
-        isAuthenticated
-            ? setWelcomeMsg(`Welcome ${firebase.auth.currentUser.displayName}`)
-            : history.push('/cta')
-    }
-
     useEffect(() => {
         checkAuth()
-        getCatalog()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, enrolledCourses, completedCourses])
 
