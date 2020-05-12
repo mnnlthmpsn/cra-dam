@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Damzinium Inc. Educational Platform",
   "main": "src/index.js",
+  "engines": {
+    "node": "14.2.x"
+  },
   "dependencies": {
     "antd": "^4.2.0",
     "axios": "^0.19.2",
